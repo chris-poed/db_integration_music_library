@@ -10,6 +10,5 @@ class AlbumRepository:
         for row in rows:
             item = Album(row['id'], row['title'], row['release_year'], row['artist_id'])
             albums.append(item)
-        print(albums, '<----my albums')
         return albums
     
