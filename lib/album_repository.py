@@ -12,3 +12,7 @@ class AlbumRepository:
             albums.append(item)
         return albums
     
+    def find(self):
+        user_input_album_id = input('Enter an album id')
+        row = self._connection.execute(f'SELECT * FROM albums WHERE id = {user_input_album_id}')[0]
+        return Album(row['id'], row['title'], row['release_year'], row['artist_id'])

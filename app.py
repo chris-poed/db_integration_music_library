@@ -23,3 +23,8 @@ albums = album_repository.all()
 
 for album in albums:
     print(album)
+
+
+
+find_album = album_repository.find()
+print(find_album)

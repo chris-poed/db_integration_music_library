@@ -1,4 +1,6 @@
-from pytest import mark
+import builtins
+
+from pytest import MonkeyPatch, mark
 
 from lib.album_repository import AlbumRepository
 from lib.album import Album
@@ -28,3 +30,11 @@ def test_get_all_records(db_connection):
             Album(11, "Fodder on My Wings", 1982, 4),
             Album(12, "Ring Ring", 1973, 2),
         ]
+
+@mark.it('#find returns a single album when passed an id')
+def test_find_album_from_id(db_connection, monkeypatch):
+        monkeypatch.setattr(builtins, "input", lambda _: "12") # Arrange: fake user input
+        db_connection.seed("seeds/music_library.sql")
+        repository = AlbumRepository(db_connection)
+        album = repository.find()
+        assert album == Album(12, 'Ring Ring', 1973, 2)
